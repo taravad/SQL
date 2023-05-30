@@ -65,18 +65,24 @@ INSERT INTO superbowls(Date,SB,Winner,Winner_Pts,Loser,Loser_Pts,MVP,Stadium,Cit
 INSERT INTO superbowls(Date,SB,Winner,Winner_Pts,Loser,Loser_Pts,MVP,Stadium,City,State) VALUES ('Jan 14 1968','II (2)','Green Bay Packers',33,'Oakland Raiders',14,'Bart Starr+','Orange Bowl','Miami','Florida');
 INSERT INTO superbowls(Date,SB,Winner,Winner_Pts,Loser,Loser_Pts,MVP,Stadium,City,State) VALUES ('Jan 15 1967','I (1)','Green Bay Packers',35,'Kansas City Chiefs',10,'Bart Starr+','Memorial Coliseum','Los Angeles','California');
 
+--Display all data
 SELECT * FROM superbowls;
 
 
+--What is the maximum winning points?
 SELECT MAX(Winner_Pts) FROM superbowls;
+--WHat is the minimum winning points? 
 SELECT MIN(Winner_Pts) FROM superbowls;
+--WHat is the average winning points
 SELECT AVG(Winner_Pts) FROM superbowls;
 
+--Which team recieved more than 100 winning points in all of their superbowls?
 SELECT Winner, SUM(Winner_Pts) AS total_pts FROM superbowls 
     GROUP BY Winner
     HAVING total_Pts > 100 
     ;
 
+--How many winning teams are in each point zone? 
 SELECT COUNT (*),
     CASE 
         WHEN Winner_Pts > 30 THEN "above avg points"
@@ -87,9 +93,10 @@ FROM superbowls
 GROUP BY pt_zone; 
 
 
-
+--Which superbowls were the New England Patriots in?
 /* OR */
 SELECT SB FROM superbowls WHERE (Winner= 'New England Patriots' OR Loser= 'New England Patriots');
 
+--Which superbowls did the New England Patriots win with over 20 points?
 /* AND */
 SELECT SB FROM superbowls WHERE (Winner= 'New England Patriots' AND Winner_Pts > 20);
